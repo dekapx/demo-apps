@@ -12,12 +12,16 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableBatchProcessing
 public class BatchConfig {
+    @Value("${trade.batch.size}")
+    private Integer batchSize;
+
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
 
@@ -51,7 +55,7 @@ public class BatchConfig {
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<String, String> chunk(5)
+                .<String, String> chunk(batchSize)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)

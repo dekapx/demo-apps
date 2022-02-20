@@ -20,7 +20,7 @@ public class TradeTransactionServiceImpl implements TradeTransactionService {
     }
 
     @Override
-    public List<TradeTransaction> findAll() {
-        return this.repository.findAll();
+    public List<TradeTransaction> findTransactions(final Integer limit) {
+        return this.repository.findTransactions(limit);
     }
 }

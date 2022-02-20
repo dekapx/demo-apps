@@ -36,6 +36,17 @@ public class TradeTransactionRepositoryITest {
 
     @Order(2)
     @Test
+    public void shouldFindAndReturnTradeTransactionsByLimit() {
+        var tradeTransactions = this.repository.findTransactions(3);
+        assertThat(tradeTransactions)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(3)
+                .hasAtLeastOneElementOfType(TradeTransaction.class);
+    }
+
+    @Order(3)
+    @Test
     public void createVerifyAndCleanUpTransaction() {
         create();
         verify();

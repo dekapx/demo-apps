@@ -7,6 +7,7 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,6 +16,9 @@ import java.util.List;
 @StepScope
 @Component("tradeItemReader")
 public class TradeItemReader implements ItemReader<TradeTransaction>, InitializingBean {
+    @Value("${trade.batch.limit}")
+    private Integer limit;
+
     private List<TradeTransaction> tradeTransactions;
 
     private final TradeTransactionService tradeTransactionService;
@@ -26,7 +30,7 @@ public class TradeItemReader implements ItemReader<TradeTransaction>, Initializi
 
     @Override
     public void afterPropertiesSet() {
-        this.tradeTransactions = this.tradeTransactionService.findAll();
+        this.tradeTransactions = this.tradeTransactionService.findTransactions(limit);
     }
 
     @Override

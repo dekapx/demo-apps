@@ -5,5 +5,5 @@ import net.dekapx.demoapp.domain.TradeTransaction;
 import java.util.List;
 
 public interface TradeTransactionService {
-    List<TradeTransaction> findAll();
+    List<TradeTransaction> findTransactions(Integer limit);
 }
