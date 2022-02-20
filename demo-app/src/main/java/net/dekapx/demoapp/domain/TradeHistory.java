@@ -7,6 +7,6 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "trade_trans")
+@Table(name = "trade_history")
 public class TradeHistory extends AbstractBaseEntity {
 }
