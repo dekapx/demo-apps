@@ -2,7 +2,9 @@ package net.dekapx.demoapp.batch.writer;
 
 import lombok.extern.slf4j.Slf4j;
 import net.dekapx.demoapp.domain.TradeTransaction;
+import net.dekapx.demoapp.service.TradeHistoryService;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,8 +12,15 @@ import java.util.List;
 @Slf4j
 @Component("tradeItemWriter")
 public class TradeItemWriter implements ItemWriter<TradeTransaction> {
+    private TradeHistoryService tradeHistoryService;
+
+    @Autowired
+    public TradeItemWriter(final TradeHistoryService tradeHistoryService) {
+        this.tradeHistoryService = tradeHistoryService;
+    }
+
     @Override
-    public void write(List<? extends TradeTransaction> list) throws Exception {
+    public void write(final List<? extends TradeTransaction> list) {
 
     }
 }

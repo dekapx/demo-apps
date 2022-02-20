@@ -9,21 +9,24 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @StepScope
 @Component("tradeItemReader")
 public class TradeItemReader implements ItemReader<TradeTransaction>, InitializingBean {
-    private List<TradeTransaction> tradeTransactions = new ArrayList<>();
+    private List<TradeTransaction> tradeTransactions;
+
+    private final TradeTransactionService tradeTransactionService;
 
     @Autowired
-    private TradeTransactionService tradeTransactionService;
+    public TradeItemReader(final TradeTransactionService tradeTransactionService) {
+        this.tradeTransactionService = tradeTransactionService;
+    }
 
     @Override
     public void afterPropertiesSet() {
-        this.tradeTransactions.addAll(this.tradeTransactionService.findAll());
+        this.tradeTransactions = this.tradeTransactionService.findAll();
     }
 
     @Override

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component("tradeItemProcessor")
 public class TradeItemProcessor implements ItemProcessor<TradeTransaction, TradeTransaction> {
     @Override
-    public TradeTransaction process(TradeTransaction tradeTransaction) throws Exception {
-        return null;
+    public TradeTransaction process(final TradeTransaction tradeTransaction) throws Exception {
+        return tradeTransaction;
     }
 }

@@ -5,6 +5,7 @@ import net.dekapx.demoapp.domain.TradeTransaction;
 import net.dekapx.demoapp.repository.TradeTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
