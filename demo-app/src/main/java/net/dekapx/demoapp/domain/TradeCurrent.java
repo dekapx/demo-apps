@@ -7,6 +7,6 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "trades")
-public class Trade extends AbstractBaseEntity {
+@Table(name = "trade_current")
+public class TradeCurrent extends AbstractBaseEntity {
 }
