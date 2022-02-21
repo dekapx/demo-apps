@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @MappedSuperclass
-abstract class AbstractBaseEntity implements Serializable  {
+public abstract class AbstractBaseEntity implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
