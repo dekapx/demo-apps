@@ -16,22 +16,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class BatchInvokerImpl implements BatchInvoker {
     @Autowired
-    private JobLauncher jobLauncher;
+    private Job processJob;
 
     @Autowired
-    private Job processJob;
+    private JobLauncher jobLauncher;
 
     @Override
     public void invoke() {
         log.info("-------------- BatchInvoker.invoke --------------");
-        JobParameters jobParameters = new JobParametersBuilder()
+        final var jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
                 .toJobParameters();
         try {
             jobLauncher.run(processJob, jobParameters);
-            log.info("Batch job has been invoked");
-        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
-        log.error("Exception while executing the batch...", e);
+            log.info("Batch job has been invoked...");
+        } catch (JobExecutionAlreadyRunningException |
+                JobRestartException |
+                JobInstanceAlreadyCompleteException |
+                JobParametersInvalidException e) {
+            log.error("Exception while executing the batch...", e);
         }
     }
 }
