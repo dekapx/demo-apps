@@ -19,10 +19,12 @@ public class TodoRepositoryITest {
     private TodoRepository todoRepository;
 
     @Test
-    @DisplayName("ContactRepository CRUD")
+    @DisplayName("Todo CRUD Operations")
     public void createUpdateAndCleanupTodoTask() {
         create();
-        verify();
+        verify(false);
+        update();
+        verify(true);
         cleanUp();
     }
 
@@ -31,12 +33,19 @@ public class TodoRepositoryITest {
         this.todoRepository.save(todo);
     }
 
-    private void verify() {
+    private void update() {
+        final Todo todo = findByTask();
+        todo.setCompleted(true);
+        this.todoRepository.save(todo);
+    }
+
+    private void verify(boolean completed) {
         final Todo todo = findByTask();
         assertThat(todo).isNotNull()
                 .satisfies(t -> {
                     assertThat(t.getTask()).isEqualTo(TASK);
                     assertThat(t.getDescription()).isEqualTo(DESCRIPTION);
+                    assertThat(t.isCompleted()).isEqualTo(completed);
                 });
     }
 
@@ -49,7 +58,7 @@ public class TodoRepositoryITest {
         final Todo todo = new Todo();
         todo.setTask(TASK);
         todo.setDescription(DESCRIPTION);
-        todo.setCompleted(true);
+        todo.setCompleted(false);
         return todo;
     };
 
