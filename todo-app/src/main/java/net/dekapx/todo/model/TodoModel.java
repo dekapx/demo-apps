@@ -29,6 +29,6 @@ public class TodoModel {
     @Schema(description = "Todo Task Status", required = true)
     private boolean completed;
 
-    @Schema(description = "Date Todo Task Modified", required = true)
+    @Schema(description = "Todo Task Modified Date", required = true)
     private Date lastModifiedDate;
 }

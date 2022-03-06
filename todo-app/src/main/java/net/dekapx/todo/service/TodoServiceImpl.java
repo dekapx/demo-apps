@@ -50,8 +50,8 @@ public class TodoServiceImpl implements TodoService {
     }
 
     private Function<Long, Todo> findByIdFunction = (id) -> {
-        final var contactOptional = this.todoRepository.findById(id);
-        return contactOptional.orElseThrow(
+        final var todoOptional = this.todoRepository.findById(id);
+        return todoOptional.orElseThrow(
                 () -> new ResourceNotFoundException(String.format("Todo with ID [%d] not found.", id)));
     };
 
@@ -65,7 +65,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo findBySpecification(Specification<Todo> specification) {
+    public Todo findBySpecification(final Specification<Todo> specification) {
         return null;
     }
 }
