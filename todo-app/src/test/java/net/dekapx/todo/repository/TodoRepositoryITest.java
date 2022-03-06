@@ -22,10 +22,10 @@ public class TodoRepositoryITest {
     @DisplayName("Todo CRUD Operations")
     public void createUpdateAndCleanupTodoTask() {
         create();
-//        verify(false);
-//        update();
-//        verify(true);
-//        cleanUp();
+        verify(false);
+        update();
+        verify(true);
+        cleanUp();
     }
 
     private void create() {
