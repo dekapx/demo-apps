@@ -1,4 +1,4 @@
-package net.dekapx.todo.config;
+package net.dekapx.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

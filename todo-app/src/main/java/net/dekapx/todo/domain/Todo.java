@@ -1,6 +1,7 @@
 package net.dekapx.todo.domain;
 
 import lombok.Data;
+import net.dekapx.core.domain.AbstractBaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

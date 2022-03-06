@@ -1,4 +1,4 @@
-package net.dekapx.todo.domain;
+package net.dekapx.core.domain;
 
 import lombok.Getter;
 import lombok.Setter;
