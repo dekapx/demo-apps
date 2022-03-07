@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import net.dekapx.todo.adapter.TodoAdapter;
+import net.dekapx.todo.delegate.TodoDelegate;
 import net.dekapx.todo.model.TodoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class TodoController {
     @Autowired
-    private TodoAdapter todoAdapter;
+    private TodoDelegate todoDelegate;
 
     @Operation(summary = "Find a Todo Task by ID", tags = {"Todo"})
     @ApiResponses(value = {
@@ -41,7 +41,7 @@ public class TodoController {
     @GetMapping(value = "/todos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TodoModel> findById(@PathVariable Long id) {
         log.info("Find Todo Task for ID [{}]", id);
-        final TodoModel todoModel = this.todoAdapter.findById(id);
+        final TodoModel todoModel = this.todoDelegate.findById(id);
         return new ResponseEntity<>(todoModel, HttpStatus.OK);
     }
 
@@ -55,7 +55,7 @@ public class TodoController {
     @GetMapping(value = "/todos", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TodoModel>> findAll() {
         log.info("Find All Todo Tasks");
-        final List<TodoModel> todos = this.todoAdapter.findAll();
+        final List<TodoModel> todos = this.todoDelegate.findAll();
         return new ResponseEntity<>(todos, HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class TodoController {
     @PostMapping(value = "/todos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TodoModel> create(@Valid @RequestBody TodoModel todoModel) {
         log.info("Create new Todo Task...");
-        todoModel = this.todoAdapter.create(todoModel);
+        todoModel = this.todoDelegate.create(todoModel);
         return new ResponseEntity<TodoModel>(todoModel, HttpStatus.OK);
     }
 
@@ -84,7 +84,7 @@ public class TodoController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TodoModel> update(@PathVariable Long id, @Valid @RequestBody TodoModel todoModel) {
         log.info("Update Todo Task for ID [{}]...", id);
-        return new ResponseEntity<>(this.todoAdapter.update(id, todoModel), HttpStatus.OK);
+        return new ResponseEntity<>(this.todoDelegate.update(id, todoModel), HttpStatus.OK);
     }
 
     @Operation(summary = "Deletes a Todo Task", description = "", tags = {"Todo"})
@@ -94,7 +94,7 @@ public class TodoController {
     @DeleteMapping(path = "/todos/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         log.info("Delete Todo Task for ID [{}]...", id);
-        this.todoAdapter.delete(id);
+        this.todoDelegate.delete(id);
         return new ResponseEntity<>(String.format("Todo Task for id [%s] removed successfully...", id), HttpStatus.OK);
     }
 }

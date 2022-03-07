@@ -1,10 +1,10 @@
-package net.dekapx.todo.adapter;
+package net.dekapx.todo.delegate;
 
 import net.dekapx.todo.model.TodoModel;
 
 import java.util.List;
 
-public interface TodoAdapter {
+public interface TodoDelegate {
     TodoModel findById(Long id);
 
     List<TodoModel> findAll();

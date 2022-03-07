@@ -1,4 +1,4 @@
-package net.dekapx.todo.adapter;
+package net.dekapx.todo.delegate;
 
 import net.dekapx.core.mapper.Mapper;
 import net.dekapx.todo.domain.Todo;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class TodoAdapterImpl implements TodoAdapter {
+public class TodoDelegateImpl implements TodoDelegate {
     @Autowired
     private TodoService todoService;
 
